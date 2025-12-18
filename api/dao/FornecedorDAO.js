@@ -1,4 +1,4 @@
-import Fornecedor from '../models/fornecedor.js';
+import Fornecedor from './models/fornecedor.js';
 
 class FornecedorDAO {
   async listar() {

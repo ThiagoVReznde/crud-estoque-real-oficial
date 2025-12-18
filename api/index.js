@@ -1,12 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import { connectDB } from './backend/database/connect.js';
+import { connectDB } from './database/connect.js';
 
 // --- IMPORTAÇÕES DAS ROTAS ---
-import produtoRoutes from './backend/routes/produtoRoutes.js';
-import unidadeRoutes from './backend/routes/unidadeRoutes.js'; // <--- ADICIONE ISSO
-import fornecedorRoutes from './backend/routes/fornecedorRoutes.js'; // <--- ADICIONE ISSO
+import produtoRoutes from './routes/produtoRoutes.js';
+import unidadeRoutes from './routes/unidadeRoutes.js'; // <--- ADICIONE ISSO
+import fornecedorRoutes from './routes/fornecedorRoutes.js'; // <--- ADICIONE ISSO
 
 dotenv.config();
 
