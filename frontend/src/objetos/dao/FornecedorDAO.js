@@ -1,6 +1,7 @@
 const API_URL = '/api/fornecedor'; 
 
 class FornecedorDAO {
+  
   async listar() {
     try {
       const response = await fetch(API_URL);
@@ -23,6 +24,22 @@ class FornecedorDAO {
     } catch (error) {
       console.error(error);
       return null;
+    }
+  }
+
+  // --- ADICIONADO AGORA ---
+  async excluir(id) {
+    try {
+      const response = await fetch(`${API_URL}/${id}`, { 
+        method: 'DELETE' 
+      });
+      
+      if (!response.ok) throw new Error('Erro ao excluir fornecedor');
+      
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
     }
   }
 }
