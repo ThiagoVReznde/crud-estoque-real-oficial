@@ -18,7 +18,9 @@ app.use(cors());
 // O connect.js garante que não vai abrir conexões duplicadas.
 connectDB();
 
-app.get('/', (req, res) => res.send('Backend rodando!'));
+app.get(['/', '/api'], (req, res) => {
+  res.send('Backend do Estoque Rodando! 🚀');
+});
 
 // 2. CORREÇÃO DAS ROTAS (Adicionado /api)
 // Como o vercel.json redireciona "/api/...", o Express recebe a URL completa.
@@ -36,6 +38,14 @@ if (process.env.NODE_ENV !== 'production') {
     console.log(`💻 Servidor rodando LOCALMENTE na porta ${PORT}`);
   });
 }
+
+app.use((req, res) => {
+  res.status(404).json({
+    erro: 'Rota não encontrada',
+    caminho_que_voce_tentou: req.originalUrl, // <--- ISSO VAI NOS DIZER A VERDADE
+    metodo: req.method
+  });
+});
 
 // 4. EXPORTAÇÃO OBRIGATÓRIA
 export default app;
