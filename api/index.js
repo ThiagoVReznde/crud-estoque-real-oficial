@@ -3,10 +3,9 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import { connectDB } from './database/connect.js';
 
-// --- IMPORTAÇÕES DAS ROTAS ---
 import produtoRoutes from './routes/produtoRoutes.js';
-import unidadeRoutes from './routes/unidadeRoutes.js'; // <--- ADICIONE ISSO
-import fornecedorRoutes from './routes/fornecedorRoutes.js'; // <--- ADICIONE ISSO
+import unidadeRoutes from './routes/unidadeRoutes.js';
+import fornecedorRoutes from './routes/fornecedorRoutes.js';
 
 dotenv.config();
 
@@ -14,28 +13,29 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// --- DEFINIÇÃO DAS URLs ---
+// 1. CONEXÃO IMEDIATA (Sem bloquear)
+// Na Vercel, conectamos assim que o arquivo carrega.
+// O connect.js garante que não vai abrir conexões duplicadas.
+connectDB();
+
 app.get('/', (req, res) => res.send('Backend rodando!'));
 
-app.use('/produto', produtoRoutes);
-app.use('/unidade', unidadeRoutes); // <--- ADICIONE ISSO
-app.use('/fornecedor', fornecedorRoutes); // <--- ADICIONE ISSO
+// 2. CORREÇÃO DAS ROTAS (Adicionado /api)
+// Como o vercel.json redireciona "/api/...", o Express recebe a URL completa.
+// Precisamos incluir o prefixo /api aqui para casar.
+app.use('/api/produto', produtoRoutes);
+app.use('/api/unidade', unidadeRoutes);
+app.use('/api/fornecedor', fornecedorRoutes);
 
-const PORT = process.env.PORT || 3000;
+// 3. INICIALIZAÇÃO CONDICIONAL
+// Se estiver rodando no seu PC (Node), ele faz o listen.
+// Se estiver na Vercel, ele ignora isso e apenas exporta o app.
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`💻 Servidor rodando LOCALMENTE na porta ${PORT}`);
+  });
+}
 
-const startServer = async () => {
-  try {
-    console.log('Iniciando o servidor...');
-    await connectDB();
-    app.listen(PORT, () => {
-      console.log(`Servidor rodando na porta ${PORT}`);
-    });
-  } catch (error) {
-    console.error('Erro fatal:', error);
-    process.exit(1);
-  }
-};
-
-startServer();
-
+// 4. EXPORTAÇÃO OBRIGATÓRIA
 export default app;

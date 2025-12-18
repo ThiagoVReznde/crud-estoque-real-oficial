@@ -24,8 +24,8 @@ export async function connectDB() {
   
     if (!cached.promise) {
       const opts = {
-        bufferCommands: false,
-      };
+      bufferCommands: false,
+    };
   
       console.log("⏳ Tentando conectar ao MongoDB..."); // <--- LOG NOVO
       console.log(`📡 URI: ${process.env.MONGO_URI.substring(0, 20)}...`); // <--- Mostra o começo da URI para ver se leu o .env
