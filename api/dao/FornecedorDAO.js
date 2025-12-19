@@ -6,8 +6,13 @@ class FornecedorDAO {
   }
 
   async salvar(dados) {
-    const novoFornecedor = new Fornecedor(dados);
-    return await novoFornecedor.save();
+    if (id) {
+      // Procura pelo ID e atualiza os dados existentes
+      return await Fornecedor.findByIdAndUpdate(id, dados, { new: true });
+    } else {
+      // Cria um novo registro
+      return await Fornecedor.create(dados);
+    }
   }
 
   async atualizar(id, dados) {

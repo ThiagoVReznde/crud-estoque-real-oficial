@@ -6,8 +6,13 @@ class UnidadeDAO {
   }
 
   async salvar(dados) {
-    const novaUnidade = new Unidade(dados);
-    return await novaUnidade.save();
+    if (id) {
+      // Procura pelo ID e atualiza os dados existentes
+      return await Unidade.findByIdAndUpdate(id, dados, { new: true });
+    } else {
+      // Cria um novo registro
+      return await Unidade.create(dados);
+    }
   }
 
   async atualizar(id, dados) {

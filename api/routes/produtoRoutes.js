@@ -24,10 +24,12 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const atualizado = await dao.atualizar(req.params.id, req.body);
+    const id = req.params.id;
+    const dados = req.body;
+    const atualizado = await dao.salvar(id, dados); 
     res.json(atualizado);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ erro: err.message });
   }
 });
 

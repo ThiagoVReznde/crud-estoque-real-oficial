@@ -78,17 +78,18 @@ const ProdutoForm = () => {
     setLoading(true);
 
     const payload = {
+      // ADICIONE ESTA LINHA: Se houver um ID, ele vai no pacote
+      _id: id || null, 
       nome: produto.nome,
       quantidade: Number(produto.quantidade),
-      // Envia apenas o ID se existir, ou o objeto completo para criar novo
       unidade: modoUnidade === 'existente' ? produto.unidade._id : { nome: produto.unidade.nome, sigla: produto.unidade.sigla },
       fornecedor: modoFornecedor === 'existente' ? produto.fornecedor._id : { nome: produto.fornecedor.nome, cnpj: produto.fornecedor.cnpj, telefones: produto.fornecedor.telefones }
     };
-
-    // Chama o método gravar (POST ou PUT dependendo da lógica do seu DAO)
+  
+    // Agora o produtoDAO receberá o objeto com o _id incluso
     const res = await produtoDAO.gravar(payload);
     setLoading(false);
-    if (res) navigate('/'); // Redireciona para a listagem após sucesso
+    if (res) navigate('/');
   };
 
   // Estilo padrão para os inputs

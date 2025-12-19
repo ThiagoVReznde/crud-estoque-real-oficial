@@ -16,7 +16,6 @@ router.post('/', async (req, res) => {
   res.status(201).json(novo);
 });
 
-// --- NOVO MÉTODO: ATUALIZAR/EDITAR (PUT) ---
 // O :id na URL identifica qual fornecedor será alterado
 router.put('/:id', async (req, res) => {
   try {

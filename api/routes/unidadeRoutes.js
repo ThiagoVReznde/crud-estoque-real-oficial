@@ -17,21 +17,21 @@ router.get('/', async (req, res) => {
 // POST: Criar nova
 router.post('/', async (req, res) => {
   try {
-    const novo = await dao.salvar(null, req.body); // Passamos null como ID para criação
+    const novo = await dao.salvar(null, req.body); // null como ID
     res.status(201).json(novo);
   } catch (err) {
     res.status(500).json({ error: 'Erro ao salvar unidade: ' + err.message });
   }
 });
 
-// --- NOVO MÉTODO: ATUALIZAR (PUT) ---
+// PUT
 router.put('/:id', async (req, res) => {
   try {
     const id = req.params.id; // Captura o ID da URL
     const dados = req.body;
     
     // Chama o salvar passando o ID para indicar atualização
-    const atualizado = await dao.salvar(id, dados);
+    const atualizado = await dao.atualizar(id, dados);
     
     if (atualizado) {
       res.json(atualizado);

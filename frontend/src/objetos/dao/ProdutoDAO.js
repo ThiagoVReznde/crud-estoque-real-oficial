@@ -14,14 +14,21 @@ class ProdutoDAO {
 
   async gravar(produto) {
     try {
-      const response = await fetch(API_URL, {
-        method: 'POST', // Backend inteligente decide se cria fornecedor/unidade ou só vincula
+      // Se o produto já tem _id, o destino é /api/produto/ID e o método é PUT
+      const isEdicao = produto._id;
+      const url = isEdicao ? `/api/produto/${produto._id}` : '/api/produto';
+      const method = isEdicao ? 'PUT' : 'POST';
+  
+      const response = await fetch(url, {
+        method: method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(produto),
       });
+  
+      if (!response.ok) throw new Error('Erro na comunicação com o servidor');
       return await response.json();
     } catch (error) {
-      console.error(error);
+      console.error("Erro no gravar:", error);
       return null;
     }
   }
