@@ -41,45 +41,35 @@ const ListaUnidades = () => {
       </div>
 
       {/* TABELA ORGANIZADA E CENTRALIZADA */}
-      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="bg-slate-50 border-b border-slate-200">
-              <th className="p-4 font-bold text-slate-700 text-sm uppercase tracking-wider">Descrição</th>
-              <th className="p-4 font-bold text-slate-700 text-sm uppercase tracking-wider">Sigla</th>
-              <th className="p-4 font-bold text-slate-700 text-sm uppercase tracking-wider text-center">Ações</th>
+      <div className="items-center bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-300">
+      <table className="w-full text-left border-collapse">
+        <thead>
+          <tr className="bg-slate-100">
+            <th className="p-4 border border-slate-300 font-bold text-slate-700 text-sm uppercase">Descrição</th>
+            <th className="p-4 border border-slate-300 font-bold text-slate-700 text-sm uppercase">Sigla</th>
+            <th className="p-4 border border-slate-300 font-bold text-slate-700 text-sm uppercase text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {unidades.map((u) => (
+            <tr key={u._id} className="hover:bg-slate-50 transition-colors">
+              <td className="p-4 border border-slate-300 text-slate-800 font-medium">{u.nome}</td>
+              <td className="p-4 border border-slate-300">
+                <span className="bg-slate-100 text-slate-700 px-3 py-1 rounded-lg text-xs font-black border border-slate-300 lowercase">
+                  {u.sigla}
+                </span>
+              </td>
+              <td className="p-4 border border-slate-300 text-center">
+                <div className="flex justify-center gap-4">
+                  <button onClick={() => navigate(`/unidade/editar/${u._id}`)} className="text-blue-600 font-bold hover:underline">Editar</button>
+                  <button onClick={() => excluirUnidade(u._id)} className="text-red-500 font-bold hover:underline">Excluir</button>
+                </div>
+              </td>
             </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {unidades.map((u) => (
-              <tr key={u._id} className="hover:bg-slate-50 transition-colors">
-                <td className="p-4 text-slate-800 font-medium">{u.nome}</td>
-                <td className="p-4">
-                  <span className="bg-slate-100 text-slate-700 px-3 py-1 rounded-lg text-xs font-black border border-slate-200">
-                    {u.sigla}
-                  </span>
-                </td>
-                <td className="p-4">
-                  <div className="flex justify-center gap-4">
-                    <button 
-                      onClick={() => navigate(`/unidade/editar/${u._id}`)}
-                      className="text-blue-600 hover:text-blue-800 font-bold text-sm transition-colors"
-                    >
-                      Editar
-                    </button>
-                    <button 
-                      onClick={() => excluirUnidade(u._id)}
-                      className="text-red-500 hover:text-red-700 font-bold text-sm transition-colors"
-                    >
-                      Excluir
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
+    </div>
 
       {/* MENSAGEM CASO VAZIO */}
       {unidades.length === 0 && (

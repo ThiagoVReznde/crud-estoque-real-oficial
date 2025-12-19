@@ -41,42 +41,34 @@ const ListaFornecedores = () => {
       </div>
 
       {/* TABELA ORGANIZADA E CENTRALIZADA */}
-      <div className="max-w-5xl mx-auto bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-slate-50 border-b border-slate-200">
-                <th className="p-4 font-bold text-slate-700 text-sm uppercase tracking-wider">Razão Social</th>
-                <th className="p-4 font-bold text-slate-700 text-sm uppercase tracking-wider">CNPJ</th>
+      {/* TABELA COM BORDAS TIPO GRADE */}
+    <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-300">
+      <div className="overflow-x-auto">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="bg-slate-100">
+              <th className="p-4 border border-slate-300 font-bold text-slate-700 text-sm uppercase">Razão Social</th>
+              <th className="p-4 border border-slate-300 font-bold text-slate-700 text-sm uppercase">CNPJ</th>
+              <th className="p-4 border border-slate-300 font-bold text-slate-700 text-sm uppercase text-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {fornecedores.map((f) => (
+              <tr key={f._id} className="hover:bg-blue-50/50 transition-colors">
+                <td className="p-4 border border-slate-300 text-slate-800 font-medium">{f.nome}</td>
+                <td className="p-4 border border-slate-300 text-slate-600 font-mono text-sm">{f.cnpj}</td>
+                <td className="p-4 border border-slate-300 text-center">
+                  <div className="flex justify-center gap-4">
+                    <button onClick={() => navigate(`/fornecedor/editar/${f._id}`)} className="text-blue-600 font-bold hover:underline">Editar</button>
+                    <button onClick={() => excluirFornecedor(f._id)} className="text-red-500 font-bold hover:underline">Excluir</button>
+                  </div>
+                </td>
               </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {fornecedores.map((f) => (
-                <tr key={f._id} className="hover:bg-blue-50/30 transition-colors">
-                  <td className="p-4 text-slate-800 font-medium">{f.nome}</td>
-                  <td className="p-4 text-slate-600 font-mono text-sm">{f.cnpj}</td>
-                  <td className="p-4">
-                    <div className="flex justify-center gap-4">
-                      <button 
-                        onClick={() => navigate(`/fornecedor/editar/${f._id}`)}
-                        className="text-blue-600 hover:text-blue-800 font-bold text-sm transition-colors"
-                      >
-                        Editar
-                      </button>
-                      <button 
-                        onClick={() => excluirFornecedor(f._id)}
-                        className="text-red-500 hover:text-red-700 font-bold text-sm transition-colors"
-                      >
-                        Excluir
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
+    </div>
 
       {/* MENSAGEM CASO VAZIO */}
       {fornecedores.length === 0 && (
