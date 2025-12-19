@@ -4,17 +4,13 @@ import UnidadeDAO from '../dao/UnidadeDAO.js';
 const router = express.Router();
 const dao = new UnidadeDAO();
 
-// GET: Listar todas
+// LISTAR (GET)
 router.get('/', async (req, res) => {
-  try {
-    const lista = await dao.listar();
-    res.json(lista);
-  } catch (err) {
-    res.status(500).json({ error: 'Erro ao buscar unidades' });
-  }
+  const lista = await dao.listar();
+  res.json(lista);
 });
 
-// api/routes/unidadeRoutes.js
+// CRIAR (POST)
 router.post('/', async (req, res) => {
   try {
     const novo = await dao.salvar(null, req.body); 
@@ -24,17 +20,19 @@ router.post('/', async (req, res) => {
   }
 });
 
+// EDITAR (PUT)
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const atualizado = await dao.salvar(id, req.body); 
+    // Passamos o ID da URL e os dados do corpo
     res.json(atualizado);
   } catch (err) {
     res.status(500).json({ erro: err.message });
   }
 });
 
-// DELETE: Remover
+// EXCLUIR (DELETE)
 router.delete('/:id', async (req, res) => {
     try {
       await dao.excluir(req.params.id);

@@ -13,7 +13,6 @@ router.get('/', async (req, res) => {
 // CRIAR (POST)
 router.post('/', async (req, res) => {
   try {
-    // Passamos 'null' para o ID, pois é um novo registro
     const novo = await dao.salvar(null, req.body); 
     res.status(201).json(novo);
   } catch (err) {
@@ -21,7 +20,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT (Edição)
+// EDITAR (PUT)
 router.put('/:id', async (req, res) => {
   try {
     const id = req.params.id;
@@ -34,7 +33,7 @@ router.put('/:id', async (req, res) => {
     }
     res.json(atualizado);
   } catch (err) {
-    res.status(500).json({ erro: err.message });
+    res.status(500).json({ erro: err.message }); // esse catch foi util
   }
 });
 

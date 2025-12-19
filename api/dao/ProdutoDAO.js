@@ -11,19 +11,19 @@ class ProdutoDAO {
   }
 
   async salvar(id, produtoData) {
-    // 1. Trata Unidade (Se for objeto novo, cria; se for string, é ID)
+    // tratamento Unidade (Se for objeto novo, cria; se for string, é ID)
     if (produtoData.unidade && typeof produtoData.unidade === 'object' && !produtoData.unidade._id) {
         const novaUnidade = await Unidade.create(produtoData.unidade);
         produtoData.unidade = novaUnidade._id;
     }
 
-    // 2. Trata Fornecedor (Se for objeto novo, cria)
+    // tratamento Fornecedor (Se for objeto novo, cria)
     if (produtoData.fornecedor && typeof produtoData.fornecedor === 'object' && !produtoData.fornecedor._id) {
         const novoFornecedor = await Fornecedor.create(produtoData.fornecedor);
         produtoData.fornecedor = novoFornecedor._id;
     }
 
-    // 3. Lógica de Decisão: Editar ou Criar?
+    // verifica se id existe
     if (id && id !== "null") {
         // Modo Edição: Atualiza o existente e retorna o novo objeto
         return await Produto.findByIdAndUpdate(id, produtoData, { new: true });

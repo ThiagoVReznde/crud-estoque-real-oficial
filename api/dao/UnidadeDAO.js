@@ -5,19 +5,21 @@ class UnidadeDAO {
     return await Unidade.find().sort({ nome: 1 });
   }
 
-  // api/dao/UnidadeDAO.js
+  // Na pratica, try/catch nunca pegou um dos
+  // problemas que tive mas ok
   async salvar(id, dados) {
-    if (id && id !== 'null' && id !== 'undefined') {
-      // Modo Edição: Localiza e atualiza
-      return await Unidade.findByIdAndUpdate(id, dados, { new: true });
-    } else {
-      // Modo Criação: Novo registro
-      return await Unidade.create(dados);
+    try{
+    // verifica se id existe
+      if (id && id !== 'null') {
+        // PUT
+        return await Unidade.findByIdAndUpdate(id, dados, { new: true });
+      } else {
+        // POST
+        return await Unidade.create(dados);
+      }
+    } catch (error){
+      throw new Error("Erro no banco de dados: " + error.message);
     }
-  }
-
-  async atualizar(id, dados) {
-    return await Unidade.findByIdAndUpdate(id, dados, { new: true });
   }
 
   async excluir(id) {

@@ -7,21 +7,17 @@ class FornecedorDAO {
 
   async salvar(id, dados) {
     try {
-      // Verificamos se o ID existe e se não é uma string "null" ou "undefined"
-      if (id && id !== 'null' && id !== 'undefined') {
-        // Edição: Procura pelo ID e atualiza
+      // verifica se id existe
+      if (id && id !== 'null') {
+        // PUT
         return await Fornecedor.findByIdAndUpdate(id, dados, { new: true });
       } else {
-        // Criação: Gera um novo registro
+        // POST
         return await Fornecedor.create(dados);
       }
     } catch (error) {
       throw new Error("Erro no banco de dados: " + error.message);
     }
-  }
-
-  async atualizar(id, dados) {
-    return await Fornecedor.findByIdAndUpdate(id, dados, { new: true });
   }
 
   async excluir(id) {
