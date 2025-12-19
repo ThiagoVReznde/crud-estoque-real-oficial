@@ -13,20 +13,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+// CRIAR (POST)
 router.post('/', async (req, res) => {
   try {
-    const novo = await dao.salvar(req.body);
+    const novo = await dao.salvar(null, req.body); // Primeiro param é null
     res.status(201).json(novo);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ erro: err.message });
   }
 });
 
+// EDITAR (PUT)
 router.put('/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const dados = req.body;
-    const atualizado = await dao.salvar(id, dados); 
+    const atualizado = await dao.salvar(id, dados); // Passa ID e Dados
     res.json(atualizado);
   } catch (err) {
     res.status(500).json({ erro: err.message });
