@@ -30,9 +30,9 @@ app.use((req, res, next) => {
 // 2. CORREÇÃO DAS ROTAS (Adicionado /api)
 // Como o vercel.json redireciona "/api/...", o Express recebe a URL completa.
 // Precisamos incluir o prefixo /api aqui para casar.
-app.use('/api/produto', produtoRoutes);
-app.use('/api/unidade', unidadeRoutes);
-app.use('/api/fornecedor', fornecedorRoutes);
+app.use(['/api/produto', '/produto'], produtoRoutes);
+app.use(['/api/unidade', '/unidade'], unidadeRoutes);
+app.use(['/api/fornecedor', '/fornecedor'], fornecedorRoutes);
 
 // 3. INICIALIZAÇÃO CONDICIONAL
 // Se estiver rodando no seu PC (Node), ele faz o listen.
