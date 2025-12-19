@@ -12,24 +12,26 @@ class UnidadeDAO {
     }
   }
 
-  async gravar(unidade) {
-    try {
-      // Lógica para diferenciar Criação de Edição
-      const isEdicao = unidade._id;
-      const url = isEdicao ? `${API_URL}/${unidade._id}` : API_URL;
-      const method = isEdicao ? 'PUT' : 'POST';
+// src/objetos/dao/UnidadeDAO.js
+async gravar(unidade) {
+  try {
+    const isEdicao = unidade._id; 
+    const url = isEdicao ? `/api/unidade/${unidade._id}` : '/api/unidade';
+    const method = isEdicao ? 'PUT' : 'POST';
 
-      const response = await fetch(url, {
-        method: method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(unidade),
-      });
-      return await response.json();
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
+    const response = await fetch(url, {
+      method: method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(unidade),
+    });
+
+    if (!response.ok) throw new Error('Erro ao processar unidade');
+    return await response.json();
+  } catch (error) {
+    console.error("Erro no gravar unidade:", error);
+    return null;
   }
+}
 
   async excluir(id) {
     try {

@@ -5,12 +5,13 @@ class UnidadeDAO {
     return await Unidade.find().sort({ nome: 1 });
   }
 
-  async salvar(dados) {
-    if (id) {
-      // Procura pelo ID e atualiza os dados existentes
+  // api/dao/UnidadeDAO.js
+  async salvar(id, dados) {
+    if (id && id !== 'null' && id !== 'undefined') {
+      // Modo Edição: Localiza e atualiza
       return await Unidade.findByIdAndUpdate(id, dados, { new: true });
     } else {
-      // Cria um novo registro
+      // Modo Criação: Novo registro
       return await Unidade.create(dados);
     }
   }

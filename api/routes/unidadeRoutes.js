@@ -14,32 +14,23 @@ router.get('/', async (req, res) => {
   }
 });
 
-// POST: Criar nova
+// api/routes/unidadeRoutes.js
 router.post('/', async (req, res) => {
   try {
-    const novo = await dao.salvar(null, req.body); // null como ID
+    const novo = await dao.salvar(null, req.body); 
     res.status(201).json(novo);
   } catch (err) {
-    res.status(500).json({ error: 'Erro ao salvar unidade: ' + err.message });
+    res.status(500).json({ erro: err.message });
   }
 });
 
-// PUT
 router.put('/:id', async (req, res) => {
   try {
-    const id = req.params.id; // Captura o ID da URL
-    const dados = req.body;
-    
-    // Chama o salvar passando o ID para indicar atualização
-    const atualizado = await dao.atualizar(id, dados);
-    
-    if (atualizado) {
-      res.json(atualizado);
-    } else {
-      res.status(404).json({ error: 'Unidade não encontrada' });
-    }
+    const { id } = req.params;
+    const atualizado = await dao.salvar(id, req.body); 
+    res.json(atualizado);
   } catch (err) {
-    res.status(500).json({ error: 'Erro ao editar unidade: ' + err.message });
+    res.status(500).json({ erro: err.message });
   }
 });
 
