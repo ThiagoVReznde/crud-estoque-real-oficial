@@ -1,5 +1,5 @@
 import express from 'express';
-import FornecedorDAO from '../dao/FornecedorDAO.js'; // Cuidado com Maiúsculas/minúsculas
+import FornecedorDAO from '../dao/FornecedorDAO.js';
 
 const router = express.Router();
 const dao = new FornecedorDAO();
@@ -10,18 +10,14 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const novo = await dao.salvar(req.body); // Note que no Backend o método costuma ser 'salvar' e no front 'gravar', verifique seu DAO de backend
+  const novo = await dao.salvar(req.body); 
   res.status(201).json(novo);
 });
 
-// TEM QUE TER ISSO PARA O EXCLUIR DO FRONTEND FUNCIONAR:
 router.delete('/:id', async (req, res) => {
-  try {
-    await dao.excluir(req.params.id);
-    res.json({ mensagem: 'Fornecedor excluído' });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  await dao.excluir(req.params.id);
+  res.json({ mensagem: 'Removido com sucesso!' });
 });
+
 
 export default router;
