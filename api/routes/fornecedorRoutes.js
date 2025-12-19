@@ -12,26 +12,29 @@ router.get('/', async (req, res) => {
 
 // CRIAR (POST)
 router.post('/', async (req, res) => {
-  const novo = await dao.salvar(req.body); 
-  res.status(201).json(novo);
+  try {
+    // Passamos 'null' para o ID, pois é um novo registro
+    const novo = await dao.salvar(null, req.body); 
+    res.status(201).json(novo);
+  } catch (err) {
+    res.status(500).json({ erro: err.message });
+  }
 });
 
-// O :id na URL identifica qual fornecedor será alterado
+// PUT (Edição)
 router.put('/:id', async (req, res) => {
   try {
     const id = req.params.id;
-    const dadosAtualizados = req.body;
+    const dados = req.body;
+    // Passamos o ID da URL e os dados do corpo
+    const atualizado = await dao.salvar(id, dados); 
     
-    // Certifique-se que seu DAO no BACKEND tem um método 'atualizar' ou 'salvar' que aceite o ID
-    const resultado = await dao.salvar(id, dadosAtualizados); 
-    
-    if (resultado) {
-      res.json(resultado);
-    } else {
-      res.status(404).json({ erro: "Fornecedor não encontrado" });
+    if (!atualizado) {
+      return res.status(404).json({ erro: "Fornecedor não encontrado" });
     }
-  } catch (erro) {
-    res.status(500).json({ erro: "Erro ao atualizar fornecedor" });
+    res.json(atualizado);
+  } catch (err) {
+    res.status(500).json({ erro: err.message });
   }
 });
 
