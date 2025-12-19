@@ -1,4 +1,4 @@
-const API_URL = '/api/produto'; 
+const API_URL = 'https://crud-estoque-real-oficial.vercel.app/api/produto'; 
 
 class ProdutoDAO {
   async listar() {

@@ -1,4 +1,4 @@
-const API_URL = '/api/unidade'; 
+const API_URL = 'https://crud-estoque-real-oficial.vercel.app/api/unidade'; 
 
 class UnidadeDAO {
   
