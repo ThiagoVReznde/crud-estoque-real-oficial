@@ -109,16 +109,18 @@ const ProdutoForm = () => {
             </button>
           </div>
 
+          <br/>
           {/* DADOS PRINCIPAIS */}
+
           <section className={cardSection}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div >
               <div className="md:col-span-2">
-                <label className={labelClass}>Nome do Produto</label>
+                <label className={labelClass}>Nome do Produto: </label>
                 <input name="nome" placeholder="Ex: Cadeira Ergonômica" value={produto.nome} onChange={handleInput} className={inputClass} required />
               </div>
               <div>
-                <label className={labelClass}>Quantidade</label>
-                <input name="quantidade" type="number" value={produto.quantidade} onChange={handleInput} className={inputClass} required />
+                <label className={labelClass}>Quantidade: </label>
+                <input name="quantidade" type="number" min="0" value={produto.quantidade} onChange={handleInput} className={inputClass} required />
               </div>
             </div>
           </section>

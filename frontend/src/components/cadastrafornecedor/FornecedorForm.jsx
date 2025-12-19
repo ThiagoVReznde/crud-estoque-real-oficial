@@ -66,17 +66,16 @@ const FornecedorForm = () => {
             </h3>
 
             <div>
-              <label className={labelClass}>Razão Social / Nome Fantasia: </label>
-              <input 
-                placeholder="Ex: Logística Brasil LTDA" 
-                value={fornecedor.nome} 
-                onChange={e => setFornecedor({...fornecedor, nome: e.target.value})}
-                className={inputClass}
-                required
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClass}>Razão Social / Nome Fantasia: </label>
+                <input 
+                  placeholder="Ex: Logística Brasil LTDA" 
+                  value={fornecedor.nome} 
+                  onChange={e => setFornecedor({...fornecedor, nome: e.target.value})}
+                  className={inputClass}
+                  required
+                />
+              </div>
               <div>
                 <label className={labelClass}>CNPJ: </label>
                 <input 
