@@ -14,15 +14,36 @@ router.get('/', async (req, res) => {
   }
 });
 
+// POST: Criar nova
 router.post('/', async (req, res) => {
   try {
-    const novo = await dao.salvar(req.body);
+    const novo = await dao.salvar(null, req.body); // Passamos null como ID para criação
     res.status(201).json(novo);
   } catch (err) {
     res.status(500).json({ error: 'Erro ao salvar unidade: ' + err.message });
   }
 });
 
+// --- NOVO MÉTODO: ATUALIZAR (PUT) ---
+router.put('/:id', async (req, res) => {
+  try {
+    const id = req.params.id; // Captura o ID da URL
+    const dados = req.body;
+    
+    // Chama o salvar passando o ID para indicar atualização
+    const atualizado = await dao.salvar(id, dados);
+    
+    if (atualizado) {
+      res.json(atualizado);
+    } else {
+      res.status(404).json({ error: 'Unidade não encontrada' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao editar unidade: ' + err.message });
+  }
+});
+
+// DELETE: Remover
 router.delete('/:id', async (req, res) => {
     try {
       await dao.excluir(req.params.id);

@@ -1,7 +1,6 @@
-const API_URL = '/api/fornecedor'; 
+const API_URL = '/api/fornecedor'; // Caminho relativo para Vercel
 
 class FornecedorDAO {
-  
   async listar() {
     try {
       const response = await fetch(API_URL);
@@ -15,8 +14,13 @@ class FornecedorDAO {
 
   async gravar(fornecedor) {
     try {
-      const response = await fetch(API_URL, {
-        method: 'POST',
+      // Se tiver _id, usa PUT (edição), senão usa POST (criação)
+      const isEdicao = fornecedor._id;
+      const url = isEdicao ? `${API_URL}/${fornecedor._id}` : API_URL;
+      const method = isEdicao ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method: method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(fornecedor),
       });
@@ -27,16 +31,10 @@ class FornecedorDAO {
     }
   }
 
-  // --- ADICIONADO AGORA ---
   async excluir(id) {
     try {
-      const response = await fetch(`${API_URL}/${id}`, { 
-        method: 'DELETE' 
-      });
-      
-      if (!response.ok) throw new Error('Erro ao excluir fornecedor');
-      
-      return true;
+      const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+      return response.ok;
     } catch (error) {
       console.error(error);
       return false;

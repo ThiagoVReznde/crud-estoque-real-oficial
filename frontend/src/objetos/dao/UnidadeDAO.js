@@ -1,54 +1,42 @@
-const API_URL = '/api/unidade'; 
+const API_URL = '/api/unidade';
 
 class UnidadeDAO {
-  
-  // LISTAR (GET)
   async listar() {
     try {
       const response = await fetch(API_URL);
-      
-      // Se a resposta for HTML (erro 404/500 da Vercel) em vez de JSON,
-      // o response.json() daria erro. Verificamos o ok antes.
       if (!response.ok) throw new Error('Erro ao listar unidades');
-      
       return await response.json();
     } catch (error) {
-      console.error("Erro no listar:", error);
+      console.error(error);
       return [];
     }
   }
 
-  // GRAVAR (POST)
   async gravar(unidade) {
     try {
-      const response = await fetch(API_URL, {
-        method: 'POST',
+      // Lógica para diferenciar Criação de Edição
+      const isEdicao = unidade._id;
+      const url = isEdicao ? `${API_URL}/${unidade._id}` : API_URL;
+      const method = isEdicao ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method: method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(unidade),
       });
-      
-      if (!response.ok) throw new Error('Erro ao salvar unidade');
-
       return await response.json();
     } catch (error) {
-      console.error("Erro no gravar:", error);
+      console.error(error);
       return null;
     }
   }
 
-  // --- NOVO MÉTODO: EXCLUIR (DELETE) ---
   async excluir(id) {
     try {
-      // Note que passamos o ID na URL: /api/unidade/123
-      const response = await fetch(`${API_URL}/${id}`, {
-        method: 'DELETE',
-      });
-
-      if (!response.ok) throw new Error('Erro ao excluir unidade');
-      
-      return true; // Retorna verdadeiro se deu certo
+      const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+      return response.ok;
     } catch (error) {
-      console.error("Erro no excluir:", error);
+      console.error(error);
       return false;
     }
   }
