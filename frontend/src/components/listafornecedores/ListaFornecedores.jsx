@@ -67,8 +67,8 @@ const ListaFornecedores = () => {
                       <td className="px-6 py-4 border-r border-b border-slate-200 text-center text-sm text-slate-600">{f.telefones?.[0]?.numero || "---"}</td>
                       <td className="px-6 py-4 border-b border-slate-200 text-center">
                         <div className="flex justify-center gap-4">
-                          <button onClick={() => navigate(`/fornecedor/editar/${f._id}`)} className="text-indigo-600 hover:scale-110 transition-transform">📝</button>
-                          <button onClick={() => excluirFornecedor(f._id)} className="text-red-500 hover:scale-110 transition-transform">🗑️</button>
+                          <button onClick={() => navigate(`/fornecedor/editar/${f._id}`)} className="text-indigo-600 hover:scale-110 transition-transform"> Editar </button>
+                          <button onClick={() => excluirFornecedor(f._id)} className="text-red-500 hover:scale-110 transition-transform"> Excluir </button>
                         </div>
                       </td>
                     </tr>

@@ -66,8 +66,8 @@ const ListaUnidades = () => {
                     </td>
                     <td className="px-6 py-4 border-b border-slate-200 text-center">
                       <div className="flex justify-center gap-4">
-                        <button onClick={() => navigate(`/unidade/editar/${u._id}`)} className="text-indigo-600">📝</button>
-                        <button onClick={() => excluirUnidade(u._id)} className="text-red-500">🗑️</button>
+                        <button onClick={() => navigate(`/unidade/editar/${u._id}`)} className="text-indigo-600"> Editar </button>
+                        <button onClick={() => excluirUnidade(u._id)} className="text-red-500"> Excluir </button>
                       </div>
                     </td>
                   </tr>

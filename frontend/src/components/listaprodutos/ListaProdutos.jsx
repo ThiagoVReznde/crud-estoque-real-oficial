@@ -78,21 +78,23 @@ const ListaProdutos = () => {
 
                     {/* Info de Quantidade */}
                     <div className="bg-slate-50 rounded-xl p-4 flex items-center justify-between border border-slate-100">
-                      <span className="text-sm font-bold text-slate-500 uppercase tracking-wide">Em estoque</span>
+                      <span className="text-sm font-bold text-slate-500 uppercase tracking-wide">Em estoque: </span>
                       <span className={`text-2xl font-black ${prod.quantidade <= 5 ? 'text-amber-500' : 'text-indigo-600'}`}>
                         {prod.quantidade}
                       </span>
+                     
                     </div>
                   </div>
-
+ <br/>
                   {/* Ações (Aparecem suavemente ou ficam fixas na parte inferior) */}
                   <div className="flex border-t border-slate-100 bg-slate-50/50">
                     <button 
                       onClick={() => navigate(`/produto/editar/${prod._id}`)}
                       className="flex-1 py-4 text-sm font-bold text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 transition-all border-r border-slate-100"
                     >
-                      Editar
+                     Editar
                     </button>
+                    <p>  </p>
                     <button 
                       onClick={() => excluirProduto(prod._id)}
                       className="flex-1 py-4 text-sm font-bold text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all"
