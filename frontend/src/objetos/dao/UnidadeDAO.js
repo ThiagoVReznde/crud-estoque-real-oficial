@@ -12,7 +12,6 @@ class UnidadeDAO {
     }
   }
 
-// src/objetos/dao/UnidadeDAO.js
 async gravar(unidade) {
   try {
     const isEdicao = unidade._id; 

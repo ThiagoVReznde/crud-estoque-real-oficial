@@ -27,7 +27,7 @@ const UnidadeForm = () => {
     if (res) navigate('/unidades');
   };
 
-  // --- Classes CSS Reutilizáveis (Sincronizadas com os outros Forms) ---
+  // Classes CSS Reutilizáveis
   const inputClass = "w-full border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-slate-50 hover:bg-white";
   const labelClass = "block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5";
 
@@ -35,7 +35,7 @@ const UnidadeForm = () => {
     <div className="min-h-screen bg-slate-50 py-12 px-4">
       <div className="max-w-md mx-auto">
         
-        {/* Cabeçalho de Navegação */}
+        {/* HEADER */}
         <div className="flex items-center justify-between mb-8">
           <div>
             <h2 className="text-2xl font-bold text-slate-800">

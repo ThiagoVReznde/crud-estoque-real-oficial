@@ -1,16 +1,63 @@
-# React + Vite
+📦 EstoqueMaster - Sistema de Gestão de Estoque
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O EstoqueMaster é uma plataforma Full Stack desenvolvida para o gerenciamento simplificado e profissional de inventários. O sistema permite o controle total de produtos, fornecedores e unidades de medida, apresentando uma interface moderna, responsiva e integrada com o MongoDB via Vercel.
+🚀 Funcionalidades Principais
+1. Gestão de Produtos
 
-Currently, two official plugins are available:
+    Listagem em cards dinâmicos com status visual.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+    Cadastro completo com suporte a Lógica Inteligente: crie uma nova unidade ou fornecedor sem sair do formulário de produto.
 
-## React Compiler
+    Edição e exclusão integradas.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. Gestão de Fornecedores
 
-## Expanding the ESLint configuration
+    Tabela administrativa organizada e centralizada.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+    Validação de CNPJ: Algoritmo oficial de verificação de dígitos para evitar dados inconsistentes.
+
+    Controle de múltiplos telefones de contato.
+
+3. Unidades de Medida
+
+    Padronização de métricas (KG, UN, LT, MT, etc.).
+
+    Interface simplificada para rápida manutenção das siglas do estoque.
+
+🛠️ Tecnologias Utilizadas
+
+Frontend:
+
+    React.js (Vite)
+
+    Tailwind CSS (Estilização)
+
+    React Router Dom (Navegação SPA)
+
+Backend (Serverless):
+
+    Node.js & Express
+
+    Mongoose (Modelagem de Dados)
+
+    Vercel Functions (Hospedagem API)
+
+Banco de Dados:
+
+    MongoDB Atlas (NoSQL Cloud)
+
+📂 Estrutura do Projeto
+
+├── api/                # Backend (Vercel Functions)
+│   ├── dao/            # Data Access Objects (Lógica de Banco)
+│   ├── models/         # Schemas do Mongoose
+│   ├── routes/         # Rotas da API Express
+│   └── index.js        # Ponto de entrada do servidor
+├── src/                # Frontend (React)
+│   ├── components/     # Componentes de UI (Listas e Forms)
+│   ├── layout/         # Layout padrão (Navbar/Footer)
+│   ├── objetos/dao/    # Classes de comunicação com a API
+│   ├── routes/         # Configuração de rotas do React Router
+│   └── App.jsx         # Componente raiz
+├── public/             # Arquivos estáticos
+└── vercel.json         # Configuração de Rewrites e Deploy

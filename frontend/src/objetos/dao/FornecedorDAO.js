@@ -15,7 +15,7 @@ class FornecedorDAO {
 // FornecedorDAO.js (Frontend)
 async gravar(fornecedor) {
   try {
-    // 1. Verifica se existe ID para decidir entre PUT (editar) ou POST (criar)
+    // Verifica se existe ID para decidir entre PUT (editar) ou POST (criar)
     const isEdicao = fornecedor._id; 
     const url = isEdicao ? `/api/fornecedor/${fornecedor._id}` : '/api/fornecedor';
     const method = isEdicao ? 'PUT' : 'POST';

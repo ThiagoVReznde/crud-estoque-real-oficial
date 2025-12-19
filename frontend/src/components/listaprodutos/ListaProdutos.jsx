@@ -30,7 +30,7 @@ const ListaProdutos = () => {
     <div className="min-h-screen bg-slate-50 py-10 px-4">
       <div className="max-w-6xl mx-auto">
         
-        {/* CABEÇALHO COM ESTATÍSTICAS RÁPIDAS */}
+        {/* HEADER */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
           <div>
             <h2 className="text-3xl font-extrabold text-slate-800 tracking-tight">Inventário</h2>
@@ -45,7 +45,7 @@ const ListaProdutos = () => {
           </button>
         </div>
 
-        {/* ESTADO DE CARREGAMENTO */}
+        {/* CARREGANDO */}
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 italic text-slate-400">
             <div className="w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mb-4"></div>
@@ -85,7 +85,7 @@ const ListaProdutos = () => {
                      
                     </div>
                   </div>
- <br/>
+                  <br/>
                   {/* Ações (Aparecem suavemente ou ficam fixas na parte inferior) */}
                   <div className="flex border-t border-slate-100 bg-slate-50/50">
                     <button 

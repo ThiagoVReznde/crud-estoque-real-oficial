@@ -44,7 +44,7 @@ const ListaUnidades = () => {
           </button>
         </div>
 
-        {/* TABELA CONDICIONAL */}
+        {/* TABELA */}
         {unidades.length > 0 ? (
           <div className="w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
             <table className="w-full border-collapse">

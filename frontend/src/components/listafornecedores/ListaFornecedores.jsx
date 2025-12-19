@@ -28,9 +28,9 @@ const ListaFornecedores = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 py-10 px-4">
-      <div className="max-w-5xl mx-auto flex flex-col items-center"> {/* Centraliza o conteúdo na tela */}
+      <div className="max-w-5xl mx-auto flex flex-col items-center"> {/* *era* pra centraliza o conteúdo na tela */}
         
-        {/* CABEÇALHO */}
+        {/* HEADER */}
         <div className="w-full flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
             <h2 className="text-3xl font-extrabold text-slate-800 tracking-tight text-center md:text-left">Fornecedores</h2>
@@ -45,14 +45,14 @@ const ListaFornecedores = () => {
           </button>
         </div>
 
-        {/* TABELA CONDICIONAL: Só aparece se houver dados */}
+        {/* TABELA */}
         {fornecedores.length > 0 ? (
           <div className="w-full bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-slate-100">
-                    {/* border-x e border-b criam as divisórias da grade */}
+                    {/* border-x e border-b *eram* pra criam as divisórias da grade */}
                     <th className="px-6 py-4 text-xs font-black text-slate-600 uppercase border-r border-b border-slate-200 text-center">Razão Social</th>
                     <th className="px-6 py-4 text-xs font-black text-slate-600 uppercase border-r border-b border-slate-200 text-center">CNPJ</th>
                     <th className="px-6 py-4 text-xs font-black text-slate-600 uppercase border-r border-b border-slate-200 text-center">Telefone</th>
@@ -78,7 +78,7 @@ const ListaFornecedores = () => {
             </div>
           </div>
         ) : (
-          /* MENSAGEM CASO VAZIO (Só aparece se não houver entradas) */
+          /* MENSAGEM CASO VAZIO */
           <div className="w-full text-center py-24 bg-white rounded-3xl border-2 border-dashed border-slate-200">
             <div className="text-5xl mb-4 text-slate-300">🚚</div>
             <p className="text-slate-500 font-bold text-lg">Nenhum parceiro cadastrado</p>

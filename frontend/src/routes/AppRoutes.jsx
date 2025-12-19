@@ -14,17 +14,17 @@ import UnidadeForm from '../components/cadastraunidade/UnidadeForm';
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* --- MÓDULO 1: PRODUTOS --- */}
+      {/* --- PRODUTOS --- */}
       <Route path="/" element={<ListaProdutos />} />
       <Route path="/produto/novo" element={<ProdutoForm />} />
       <Route path="/produto/editar/:id" element={<ProdutoForm />} />
 
-      {/* --- MÓDULO 2: FORNECEDORES --- */}
+      {/* --- FORNECEDORES --- */}
       <Route path="/fornecedores" element={<ListaFornecedores />} />
       <Route path="/fornecedor/novo" element={<FornecedorForm />} />
       <Route path="/fornecedor/editar/:id" element={<FornecedorForm />} />
 
-      {/* --- MÓDULO 3: UNIDADES --- */}
+      {/* --- UNIDADES --- */}
       <Route path="/unidades" element={<ListaUnidades />} />
       <Route path="/unidade/novo" element={<UnidadeForm />} />
       <Route path="/unidade/editar/:id" element={<UnidadeForm />} />

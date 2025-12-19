@@ -31,7 +31,7 @@ const FornecedorForm = () => {
     if (res) navigate('/fornecedores');
   };
 
-  // --- Classes CSS Reutilizáveis (Padrão Identidade Visual) ---
+  // Classes CSS Reutilizáveis
   const inputClass = "w-full border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-slate-50 hover:bg-white";
   const labelClass = "block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5";
 
@@ -39,7 +39,7 @@ const FornecedorForm = () => {
     <div className="min-h-screen bg-slate-50 py-12 px-4">
       <div className="max-w-2xl mx-auto">
         
-        {/* Cabeçalho */}
+        {/* HEADER */}
         <div className="flex items-center justify-between mb-8">
           <div>
             <h2 className="text-2xl font-bold text-slate-800">
@@ -58,7 +58,7 @@ const FornecedorForm = () => {
 
         <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
           
-          {/* Sessão: Informações Gerais */}
+          {/* FORM */}
           <div className="space-y-4">
             <h3 className="font-semibold text-slate-700 flex items-center gap-2 mb-4">
               <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
@@ -105,7 +105,7 @@ const FornecedorForm = () => {
 
           <hr className="border-slate-100" />
 
-          {/* Ações */}
+          {/* BUTOES */}
           <div className="flex gap-4 pt-2">
             <button 
               type="button" 
@@ -114,7 +114,7 @@ const FornecedorForm = () => {
             >
               Cancelar
             </button>
-            
+            <p> </p>
             <button 
               type="submit" 
               disabled={loading}

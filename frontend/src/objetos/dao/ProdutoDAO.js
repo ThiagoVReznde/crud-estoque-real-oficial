@@ -14,7 +14,6 @@ class ProdutoDAO {
 
   async gravar(produto) {
     try {
-      // Se o produto já tem _id, o destino é /api/produto/ID e o método é PUT
       const isEdicao = produto._id;
       const url = isEdicao ? `/api/produto/${produto._id}` : '/api/produto';
       const method = isEdicao ? 'PUT' : 'POST';

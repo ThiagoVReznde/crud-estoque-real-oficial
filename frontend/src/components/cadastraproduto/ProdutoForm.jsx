@@ -82,7 +82,7 @@ const ProdutoForm = () => {
     if (res) navigate('/');
   };
 
-  // --- Classes CSS Reutilizáveis ---
+  // Classes CSS Reutilizáveis
   const inputClass = "w-full border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-slate-50 hover:bg-white";
   const labelClass = "block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5";
   const cardSection = "bg-white p-6 rounded-xl border border-slate-200 shadow-sm";
