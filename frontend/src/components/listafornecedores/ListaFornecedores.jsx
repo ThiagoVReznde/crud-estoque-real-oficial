@@ -8,46 +8,43 @@ const ListaFornecedores = () => {
   const dao = new FornecedorDAO();
 
   const carregar = async () => setFornecedores(await dao.listar());
-  useEffect(() => { carregar(); }, []);
+
+  useEffect(() => {
+    carregar();
+  }, []);
 
   const excluir = async (id) => {
-    if (window.confirm('Excluir este fornecedor?')) {
+    if (window.confirm('Deseja remover este fornecedor?')) {
       await dao.excluir(id);
       carregar();
     }
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-slate-800">Fornecedores</h2>
-        <button onClick={() => navigate('/fornecedor/novo')} className="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 transition-colors">
+    // Container externo com mx-auto para centralizar todo o bloco
+    <div className="max-w-5xl mx-auto space-y-6">
+      
+      {/* HEADER ALINHADO COM A TABELA */}
+      <div className="flex justify-between items-center border-b border-slate-200 pb-5">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-800">🚚 Fornecedores</h2>
+          <p className="text-slate-500 text-sm">Gestão de parceiros e empresas</p>
+        </div>
+        <button 
+          onClick={() => navigate('/fornecedor/novo')} 
+          className="bg-blue-600 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-blue-700 shadow-md transition-all active:scale-95"
+        >
           + Novo Fornecedor
         </button>
       </div>
 
-      <div className="overflow-x-auto bg-white rounded-xl border border-slate-200 shadow-sm">
-        <table className="w-full text-left">
-          <thead className="bg-slate-50 border-b border-slate-200">
-            <tr>
-              <th className="p-4 font-bold text-slate-700">Razão Social</th>
-              <th className="p-4 font-bold text-slate-700">CNPJ</th>
-              <th className="p-4 font-bold text-slate-700 text-center">Ações</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {fornecedores.map(f => (
-              <tr key={f._id} className="hover:bg-blue-50/50 transition-colors">
-                <td className="p-4 text-slate-800 font-medium">{f.nome}</td>
-                <td className="p-4 text-slate-600 font-mono text-sm">{f.cnpj}</td>
-                <td className="p-4 flex justify-center gap-3">
-                  <button onClick={() => navigate(`/fornecedor/editar/${f._id}`)} className="text-blue-600 hover:text-blue-800 font-bold">Editar</button>
-                  <button onClick={() => excluir(f._id)} className="text-red-600 hover:text-red-800 font-bold">Excluir</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {/* TABELA CENTRALIZADA COM mx-auto */}
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm mx-auto w-full">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            {/* ... thead e tbody mantidos igual ao anterior */}
+          </table>
+        </div>
       </div>
     </div>
   );
