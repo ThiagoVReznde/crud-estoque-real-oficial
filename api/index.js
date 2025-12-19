@@ -11,46 +11,46 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
-// Permite conexões do seu frontend
-app.use(cors({ origin: "*" }));
+// 1. CONEXÃO IMEDIATA (Sem bloquear)
+// Na Vercel, conectamos assim que o arquivo carrega.
+// O connect.js garante que não vai abrir conexões duplicadas.
+connectDB();
 
-// --- DEBUGGER (Dedo Duro) ---
-// Isso vai mostrar nos logs da Vercel o que está chegando
+app.get(['/', '/api'], (req, res) => {
+  res.send('Backend do Estoque Rodando! 🚀');
+});
+
 app.use((req, res, next) => {
-  console.log(`[REQUEST] URL: ${req.url} | METHOD: ${req.method}`);
+  console.log(`Recebi: ${req.method} ${req.url}`);
   next();
 });
 
-connectDB();
-
-// Rota de Teste da Raiz
-app.get(['/', '/api'], (req, res) => {
-  res.json({ message: 'Backend do Estoque Rodando!', url_acessada: req.url });
-});
-
-// --- DEFINIÇÃO DAS ROTAS ---
-// Estamos forçando o prefixo /api aqui.
+// 2. CORREÇÃO DAS ROTAS (Adicionado /api)
+// Como o vercel.json redireciona "/api/...", o Express recebe a URL completa.
+// Precisamos incluir o prefixo /api aqui para casar.
 app.use('/api/produto', produtoRoutes);
 app.use('/api/unidade', unidadeRoutes);
 app.use('/api/fornecedor', fornecedorRoutes);
 
-// --- ROTA DE ERRO 404 PERSONALIZADA ---
-// Se o código chegar aqui, é porque nenhuma rota acima funcionou.
+// 3. INICIALIZAÇÃO CONDICIONAL
+// Se estiver rodando no seu PC (Node), ele faz o listen.
+// Se estiver na Vercel, ele ignora isso e apenas exporta o app.
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`💻 Servidor rodando LOCALMENTE na porta ${PORT}`);
+  });
+}
+
 app.use((req, res) => {
   res.status(404).json({
-    erro: "Rota não encontrada (404)",
-    url_que_o_express_recebeu: req.url, // <--- ISSO É O QUE PRECISAMOS SABER
-    path_do_express: req.path,
+    erro: 'Rota não encontrada',
+    caminho_que_voce_tentou: req.originalUrl, // <--- ISSO VAI NOS DIZER A VERDADE
     metodo: req.method
   });
 });
 
-if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`💻 Local server: http://localhost:${PORT}`);
-  });
-}
-
+// 4. EXPORTAÇÃO OBRIGATÓRIA
 export default app;
